@@ -1,3 +1,5 @@
+from boltons.iterutils import first
+
 
 class PigLatin:
     def __init__(self, phrase: str):
@@ -9,10 +11,17 @@ class PigLatin:
     def translate(self) -> str:
         if self.phrase == "":
             return "nil"
-        elif self.phrase[-1] == 'y':
-            return self.phrase + "nay"
-        elif self.phrase[-1].lower() in ('a', 'e', 'i', 'o', 'u'):
-            return self.phrase + "yay"
+        first_char = self.phrase[0].lower()
+        if first_char not in ('a', 'e', 'i', 'o', 'u'):
+            phrase = self.phrase[1:] + first_char
         else:
-            return self.phrase + "ay"
+            last_char = self.phrase[-1].lower()  # Ensure case-insensitivity
+            if last_char == 'y':
+                return self.phrase + "nay"
+            elif last_char in ('a', 'e', 'i', 'o', 'u'):
+                return self.phrase + "yay"
+            else:
+                phrase = self.phrase
+
+        return phrase + "ay"
 
