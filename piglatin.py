@@ -1,4 +1,4 @@
-
+vowel = ('a', 'e', 'i', 'o', 'u')
 class PigLatin:
     def __init__(self, phrase: str):
         self.phrase = phrase
@@ -9,10 +9,10 @@ class PigLatin:
     def translate(self) -> str:
         if self.phrase == "":
             return "nil"
+        elif self.phrase.endswith('y'):
+            return self.phrase + "nay"
+        elif self.phrase.endswith(vowel):
+            return  self.phrase + "yay"
         else:
-            # if ends to y append nay to end of phase
-            if self.phrase.endswith('y'):
-                phrase = self.phrase + "nay"
-            else:
-                return self.phrase
-            return phrase
+            return self.phrase
+

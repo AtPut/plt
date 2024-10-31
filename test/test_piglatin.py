@@ -22,3 +22,8 @@ class TestPigLatin(unittest.TestCase):
         piglatin = PigLatin("any")
         phrase = piglatin.translate()
         self.assertEqual("anynay", phrase)
+
+    def test_phrase_ends_with_vowel_translate_append_yay(self):
+        piglatin = PigLatin("Apple")
+        phrase = piglatin.translate()
+        self.assertEqual("Appleyay", phrase)
