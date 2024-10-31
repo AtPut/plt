@@ -1,5 +1,9 @@
 
 import re
+from audioop import error
+
+from error import PigLatinError
+
 
 class PigLatin:
     def __init__(self, phrase: str):
@@ -25,18 +29,35 @@ class PigLatin:
                 if word[0].lower() not in 'aeiou':
                     # Move all leading consonants to the end
                     index = 0
+                    word = word[0].lower() + word[1:]
                     while index < len(word) and word[index].lower() not in 'aeiou':
                         index += 1
                     translated_word = word[index:] + word[:index]
+                    translated_word.capitalize()
                 else:
                     translated_word = word
 
                 if translated_word[-1].lower() == 'y':
-                    translated_words.append(translated_word + "nay")
+                    if translated_word.isupper():
+                        translated_words.append(translated_word + "NAY")
+                    elif translated_word[1:].islower():
+                        translated_words.append(translated_word + "nay")
+                    else:
+                        raise PigLatinError
                 elif translated_word[-1].lower() in 'aeiou':
-                    translated_words.append(translated_word + "yay")
+                    if translated_word.isupper():
+                        translated_words.append(translated_word + "YAY")
+                    elif translated_word[1:].islower():
+                        translated_words.append(translated_word + "yay")
+                    else:
+                        raise PigLatinError
                 else:
-                    translated_words.append(translated_word + "ay")
+                    if translated_word.isupper():
+                        translated_words.append(translated_word + "AY")
+                    elif translated_word[1:].islower():
+                        translated_words.append(translated_word + "ay")
+                    else:
+                        raise  PigLatinError
             else:
                 translated_words.append(word)  # Append non-alphabetic parts unchanged
 
