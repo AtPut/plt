@@ -12,3 +12,8 @@ class TestPigLatin(unittest.TestCase):
         piglatin = PigLatin("hello world")
         phrase = piglatin.get_phrase()
         self.assertEqual("hello world", phrase)
+
+    def test_translate_empty_string_to_nil(self):
+        piglatin = PigLatin("")
+        phrase = piglatin.translate()
+        self.assertEqual("nil", phrase)
