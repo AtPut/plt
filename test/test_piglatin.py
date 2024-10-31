@@ -37,3 +37,8 @@ class TestPigLatin(unittest.TestCase):
         piglatin = PigLatin("hello")
         phrase = piglatin.translate()
         self.assertEqual("ellohay", phrase)
+
+    def test_phrase_starts_with_more_consonants_translate_move_to_end_append_ay(self):
+        piglatin = PigLatin("known")
+        phrase = piglatin.translate()
+        self.assertEqual("ownknay", phrase)
