@@ -10,4 +10,9 @@ class PigLatin:
         if self.phrase == "":
             return "nil"
         else:
-            return self.phrase
+            # if ends to y append nay to end of phase
+            if self.phrase.endswith('y'):
+                phrase = self.phrase + "nay"
+            else:
+                return self.phrase
+            return phrase
