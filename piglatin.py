@@ -9,21 +9,26 @@ class PigLatin:
     def translate(self) -> str:
         if self.phrase == "":
             return "nil"
-        first_char = self.phrase[0].lower()
-        if first_char not in ('a', 'e', 'i', 'o', 'u'):
-            # Move all leading consonants to the end
-            index = 0
-            while index < len(self.phrase) and self.phrase[index].lower() not in ('a', 'e', 'i', 'o', 'u'):
-                index += 1
-            phrase = self.phrase[index:] + self.phrase[:index]
-        else:
-            phrase = self.phrase
+        
+        translated_words = []
+        words = self.phrase.split()
+        
+        for word in words:
+            if word[0].lower() not in 'aeiou':
+                # Move all leading consonants to the end
+                index = 0
+                while index < len(word) and word[index].lower() not in 'aeiou':
+                    index += 1
+                translated_word = word[index:] + word[:index]
+            else:
+                translated_word = word
 
-        last_char = phrase[-1].lower()
-        if last_char == 'y':
-            return phrase + "nay"
-        elif last_char in ('a', 'e', 'i', 'o', 'u'):
-            return phrase + "yay"
-        else:
-            return phrase + "ay"
+            if translated_word[-1].lower() == 'y':
+                translated_words.append(translated_word + "nay")
+            elif translated_word[-1].lower() in 'aeiou':
+                translated_words.append(translated_word + "yay")
+            else:
+                translated_words.append(translated_word + "ay")
+        
+        return " ".join(translated_words)
 

@@ -5,8 +5,6 @@ from error import PigLatinError
 
 class TestPigLatin(unittest.TestCase):
 
-    def test_something(self):
-        pass
 
     def test_create_translator_and_get_phrase(self):
         piglatin = PigLatin("hello world")
@@ -42,3 +40,8 @@ class TestPigLatin(unittest.TestCase):
         piglatin = PigLatin("known")
         phrase = piglatin.translate()
         self.assertEqual("ownknay", phrase)
+
+    def test_translate_phrase_contains_multiple_words(self):
+        piglatin = PigLatin("hello world")
+        phrase = piglatin.translate()
+        self.assertEqual("ellohay orldway", phrase)
