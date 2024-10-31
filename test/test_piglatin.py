@@ -45,3 +45,8 @@ class TestPigLatin(unittest.TestCase):
         piglatin = PigLatin("hello world")
         phrase = piglatin.translate()
         self.assertEqual("ellohay orldway", phrase)
+
+    def test_translate_phrase_contains_multiple_words_separated_by_line(self):
+        piglatin = PigLatin("well-being")
+        phrase = piglatin.translate()
+        self.assertEqual("ellway-eingbay", phrase)

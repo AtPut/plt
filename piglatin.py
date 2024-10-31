@@ -11,8 +11,12 @@ class PigLatin:
             return "nil"
         
         translated_words = []
-        words = self.phrase.split()
-        
+        separated_by_spaces = False
+        if self.phrase.__contains__('-'):
+            words = self.phrase.split('-')
+        else:
+            words = self.phrase.split()
+            separated_by_spaces = True
         for word in words:
             if word[0].lower() not in 'aeiou':
                 # Move all leading consonants to the end
@@ -29,6 +33,8 @@ class PigLatin:
                 translated_words.append(translated_word + "yay")
             else:
                 translated_words.append(translated_word + "ay")
-        
-        return " ".join(translated_words)
+
+        if separated_by_spaces is True:
+            return " ".join(translated_words)
+        return "-".join(translated_words)
 
